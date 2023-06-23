@@ -1,0 +1,15 @@
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.csproj.AssemblyReference.cache
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.AssemblyInfoInputs.cache
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.AssemblyInfo.cs
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.csproj.CoreCompileInputs.cache
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\bin\Debug\net7.0\Midas.Net.Service.deps.json
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\bin\Debug\net7.0\Midas.Net.Service.dll
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\bin\Debug\net7.0\Midas.Net.Service.pdb
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\bin\Debug\net7.0\Midas.Net.Domain.dll
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\bin\Debug\net7.0\Midas.Net.Domain.pdb
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.csproj.CopyComplete
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.dll
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\refint\Midas.Net.Service.dll
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\Midas.Net.Service.pdb
+C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Service\obj\Debug\net7.0\ref\Midas.Net.Service.dll

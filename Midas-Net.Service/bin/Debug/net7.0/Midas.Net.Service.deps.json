@@ -1,0 +1,36 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v7.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v7.0": {
+      "Midas.Net.Service/1.0.0": {
+        "dependencies": {
+          "Midas.Net.Domain": "1.0.0"
+        },
+        "runtime": {
+          "Midas.Net.Service.dll": {}
+        }
+      },
+      "Midas.Net.Domain/1.0.0": {
+        "runtime": {
+          "Midas.Net.Domain.dll": {}
+        }
+      }
+    }
+  },
+  "libraries": {
+    "Midas.Net.Service/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Midas.Net.Domain/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}
