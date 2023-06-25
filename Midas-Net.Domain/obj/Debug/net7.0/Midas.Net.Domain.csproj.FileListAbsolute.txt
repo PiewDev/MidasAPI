@@ -10,3 +10,15 @@ C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Domain\obj\Debug\net7.0\Midas.
 C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Domain\obj\Debug\net7.0\refint\Midas.Net.Domain.dll
 C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.pdb
 C:\Users\Windows\source\repos\Midas-Net\Midas-Net.Domain\obj\Debug\net7.0\ref\Midas.Net.Domain.dll
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\bin\Debug\net7.0\Midas.Net.Domain.deps.json
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\bin\Debug\net7.0\Midas.Net.Domain.dll
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\bin\Debug\net7.0\Midas.Net.Domain.pdb
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.csproj.AssemblyReference.cache
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.AssemblyInfoInputs.cache
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.AssemblyInfo.cs
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.csproj.CoreCompileInputs.cache
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.dll
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\refint\Midas.Net.Domain.dll
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\Midas.Net.Domain.pdb
+C:\Users\Windows\source\repos\Midas-Net\MidasAPI\Midas-Net.Domain\obj\Debug\net7.0\ref\Midas.Net.Domain.dll

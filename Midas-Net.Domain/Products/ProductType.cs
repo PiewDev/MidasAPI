@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Midas.Net.Domain.Products.DTO
+namespace Midas.Net.Domain.Products
 {
-    [CrudSupport(CrudSupport.Supported)]
+    [CrudSupport]
     public class ProductType
     {
         public int ProductTypeId { get; set; }

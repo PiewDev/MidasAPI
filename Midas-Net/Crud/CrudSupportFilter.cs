@@ -46,17 +46,7 @@ namespace Midas.Net.Crud
         {
             bool hasCrudSupportAttribute = entityType.GetCustomAttributes(typeof(CrudSupportAttribute), true).Any();
 
-            if (hasCrudSupportAttribute)
-            {
-                CrudSupportAttribute crudSupportAttribute = (CrudSupportAttribute)entityType.GetCustomAttributes(typeof(CrudSupportAttribute), true).First();
-
-                if (crudSupportAttribute.CrudSupport == CrudSupport.Supported)
-                {
-                    return true;
-                }
-            }
-
-            return false;
+            return hasCrudSupportAttribute;
         }
     }
 

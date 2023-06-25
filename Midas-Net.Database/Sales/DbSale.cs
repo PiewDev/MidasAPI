@@ -1,6 +1,5 @@
 ﻿using Midas.Net.Database.Products;
 using Midas.Net.Database.SaleDetails;
-using Midas.Net.Domain.Products.DTO;
 using Midas.Net.Domain.Sales;
 using System;
 using System.Collections.Generic;
@@ -15,8 +14,8 @@ namespace Midas.Net.Database.Sales
     {
         public long SaleId { get; set; }
         public DateTime Date { get; set; }
-        public bool IsCancelled { get; set; }
         public List<DbSaleDetail> SaleDetails { get; set; }
+        public bool IsCancelled { get; set; }
 
     }
 }

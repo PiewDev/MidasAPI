@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Midas.Net.Domain.Crud
+namespace Midas.Net.Domain.Sales
 {
-    public enum CrudSupport
+    public interface ISaleRepository
     {
-        Supported,
-        NotSupported
+        Task<List<Sale>> GetSalesByDateAsync(DateTime date);
     }
 }

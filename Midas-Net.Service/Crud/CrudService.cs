@@ -1,17 +1,18 @@
 ﻿using Midas.Net.Domain;
+using Midas.Net.Domain.Crud;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Midas.Net.Service
+namespace Midas.Net.Service.Crud
 {
-    public class CrudService<TEntity, TId> : ICrudService<TEntity, TId>
+    public class CrudService<TEntity> : ICrudService<TEntity>
      where TEntity : class
     {
-        private readonly IRepository<TEntity, TId> _repository;
-        public CrudService(IRepository<TEntity, TId> repository)
+        private readonly ICrudRepository<TEntity> _repository;
+        public CrudService(ICrudRepository<TEntity> repository)
         {
             _repository = repository;
         }
@@ -22,26 +23,26 @@ namespace Midas.Net.Service
             return entities;
         }
 
-        public async Task<TEntity> GetByIdAsync(TId id)
+        public async Task<TEntity> GetByIdAsync(long id)
         {
             var entity = await _repository.GetByIdAsync(id);
             return entity;
         }
 
-        public async Task CreateAsync(object entity)
+        public async Task<TEntity> CreateAsync(object entity)
         {
-            await _repository.CreateAsync((TEntity)entity);
+            return await _repository.CreateAsync((TEntity)entity);
         }
 
-        public async Task UpdateAsync(TEntity entity)
+        public async Task<TEntity> UpdateAsync(object entity)
         {
-            await _repository.UpdateAsync(entity);
+            return await _repository.UpdateAsync((TEntity)entity);
         }
 
-        public async Task DeleteAsync(TId id)
+        public async Task DeleteAsync(long id)
         {
             await _repository.DeleteAsync(id);
-            
+
         }
     }
 }

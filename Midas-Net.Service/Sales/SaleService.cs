@@ -1,5 +1,6 @@
 ﻿using Midas.Net.Domain;
-using Midas.Net.Domain.Products.DTO;
+using Midas.Net.Domain.Crud;
+using Midas.Net.Domain.Products;
 using Midas.Net.Domain.Sales;
 using System;
 using System.Collections.Generic;
@@ -11,21 +12,26 @@ namespace Midas.Net.Service.Sales
 {
     public class SaleService :ISaleService
     {
-        private readonly IRepository<Sale, long> _saleRepository;
+        private readonly ICrudRepository<Sale> _saleCrudRepository;
 
-        private readonly IRepository<Product, long> _productRepository;
+        private readonly IProductRepository _productRepository;
 
-        public SaleService(IRepository<Sale, long> saleRepository, IRepository<Product, long> productRepository)
+        private readonly ISaleRepository _saleRepository;
+
+        public SaleService(ICrudRepository<Sale> saleCrudRepository, IProductRepository productRepository, ISaleRepository saleRepository )
         {
-            _saleRepository = saleRepository;
+            _saleCrudRepository = saleCrudRepository;
             _productRepository = productRepository;
+            _saleRepository = saleRepository;
+
         }
         public async Task<Sale> CreateSale(Sale sale)
         {
-            var productsId = sale.SaleDetails.Select(sd => sd.ProductId).ToList();
-            var products = await _productRepository.FindByAsync(entity => productsId.Contains(((Product)entity).ProductId));
+            var productIds = sale.SaleDetails.Select(sd => sd.ProductId).ToList();
+            var products = await _productRepository.GetByIdAsync(productIds);
 
-            List<long> missingIds = new List<long>();
+            var missingIds = new List<long>();
+            var insufficientStockIds = new List<long>();
 
             foreach (var saleDetail in sale.SaleDetails)
             {
@@ -33,6 +39,11 @@ namespace Midas.Net.Service.Sales
                 if (product != null)
                 {
                     saleDetail.UpdatePrice(product);
+
+                    if (saleDetail.Quantity > product.Stock)
+                    {
+                        insufficientStockIds.Add(saleDetail.ProductId);
+                    }
                 }
                 else
                 {
@@ -40,20 +51,18 @@ namespace Midas.Net.Service.Sales
                 }
             }
 
-            if (missingIds.Any())
+            if (missingIds.Any() || insufficientStockIds.Any())
             {
-                throw new MissingSaleIdsException(missingIds);
+                throw new SaleCreationException(missingIds, insufficientStockIds);
             }
 
             sale.SetDate(DateTime.Now);
 
-            return await _saleRepository.CreateAsync(sale);            
-
+            return await _saleCrudRepository.CreateAsync(sale);
         }
         public async Task<List<Sale>> GetSalesByDateAsync(DateTime date) 
         {
-            var sales = await _saleRepository.FindByAsync(s => ((Sale)s).Date == date);
-            return sales.ToList();
+            return await _saleRepository.GetSalesByDateAsync(date);
         }
     }
 

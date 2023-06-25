@@ -1,5 +1,5 @@
 ﻿using Midas.Net.Database.Products;
-using Midas.Net.Domain.Products.DTO;
+using Midas.Net.Domain.Products;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,5 +14,6 @@ namespace Midas.Net.Database.ProductTypes
         public long ProductTypeId { get; set; }
         public string Name { get; set; }
         public bool IsDeleted { get; set; }
+        public virtual ICollection<DbProduct> Products { get; set; }
     }
 }

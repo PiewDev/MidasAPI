@@ -103,6 +103,9 @@ namespace Midas.Net.Database.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("ProductId"));
 
+                    b.Property<long?>("DbProductTypeProductTypeId")
+                        .HasColumnType("bigint");
+
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
@@ -121,6 +124,8 @@ namespace Midas.Net.Database.Migrations
                         .HasColumnType("bigint");
 
                     b.HasKey("ProductId");
+
+                    b.HasIndex("DbProductTypeProductTypeId");
 
                     b.HasIndex("TypeId");
 
@@ -180,6 +185,10 @@ namespace Midas.Net.Database.Migrations
 
             modelBuilder.Entity("Midas.Net.Database.Products.DbProduct", b =>
                 {
+                    b.HasOne("Midas.Net.Database.ProductTypes.DbProductType", null)
+                        .WithMany("Products")
+                        .HasForeignKey("DbProductTypeProductTypeId");
+
                     b.HasOne("Midas.Net.Database.ProductTypes.DbProductType", "Type")
                         .WithMany()
                         .HasForeignKey("TypeId")
@@ -206,6 +215,11 @@ namespace Midas.Net.Database.Migrations
                     b.Navigation("Product");
 
                     b.Navigation("Sale");
+                });
+
+            modelBuilder.Entity("Midas.Net.Database.ProductTypes.DbProductType", b =>
+                {
+                    b.Navigation("Products");
                 });
 
             modelBuilder.Entity("Midas.Net.Database.Sales.DbSale", b =>

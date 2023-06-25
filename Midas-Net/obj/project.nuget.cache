@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "JJlmk6abOZ8n3vPFgPm+GTFO/MbW9vFeYj71k/D43MWE9/DK+Hhx1vVDrenImnZEOkkNCFJPHjY5acdGWVho3A==",
+  "dgSpecHash": "GGQEIvx1MW0BvzKy5i7F9iEQVRgEaMeya429fProiXHVGI6yn9kRTEoVnYEAPkGlnMyFAnpa4bk8IPDS3kGlug==",
   "success": true,
   "projectFilePath": "C:\\Users\\Windows\\source\\repos\\Midas-Net\\MidasAPI\\Midas-Net\\Midas.Net.csproj",
   "expectedPackageFiles": [
@@ -11,6 +11,7 @@
     "C:\\Users\\Windows\\.nuget\\packages\\azure.identity\\1.6.0\\azure.identity.1.6.0.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\humanizer.core\\2.14.1\\humanizer.core.2.14.1.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\log4net\\2.0.15\\log4net.2.0.15.nupkg.sha512",
+    "C:\\Users\\Windows\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\7.0.8\\microsoft.aspnetcore.authentication.jwtbearer.7.0.8.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.aspnetcore.openapi\\7.0.1\\microsoft.aspnetcore.openapi.7.0.1.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.bcl.asyncinterfaces\\1.1.1\\microsoft.bcl.asyncinterfaces.1.1.1.nupkg.sha512",
     "C:\\Users\\Windows\\.nuget\\packages\\microsoft.csharp\\4.7.0\\microsoft.csharp.4.7.0.nupkg.sha512",

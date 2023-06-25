@@ -1,15 +1,17 @@
 using Autofac;
-using Autofac.Core;
 using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using log4net;
 using log4net.Config;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Midas.Net.Autofac;
 using Midas.Net.Crud;
 using Midas.Net.Database;
 using Midas.Net.Mapper;
 using Midas.Net.ResponseHandling;
 using System.Reflection;
+using System.Text;
 using System.Text.Json;
 using System.Xml;
 
@@ -52,6 +54,28 @@ builder.Services.AddControllers(options =>
 
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
+
+// Configuración de JWT
+var jwtSettings = builder.Configuration.GetSection("JwtSettings");
+var secretKey = jwtSettings.GetValue<string>("SecretKey");
+var issuer = jwtSettings.GetValue<string>("Issuer");
+var audience = jwtSettings.GetValue<string>("Audience");
+var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(secretKey));
+var tokenValidationParameters = new TokenValidationParameters
+{
+    ValidateIssuer = true,
+    ValidateAudience = true,
+    ValidateIssuerSigningKey = true,
+    ValidIssuer = issuer,
+    ValidAudience = audience,
+    IssuerSigningKey = key
+};
+
+builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = tokenValidationParameters;
+    });
 
 builder.Services.AddScoped<CrudSupportFilter>();
 

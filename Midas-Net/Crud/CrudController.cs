@@ -1,8 +1,8 @@
 ﻿using Autofac.Core;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
-using Midas.Net.Domain;
 using Midas.Net.Domain.Crud;
 using Midas.Net.ResponseHandling;
 using Newtonsoft.Json;
@@ -11,6 +11,7 @@ using System.Text.Json;
 
 namespace Midas.Net.Crud
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     [ServiceFilter(typeof(CrudSupportFilter))]
@@ -58,18 +59,21 @@ namespace Midas.Net.Crud
 
             dynamic service = getDynamicService();
 
-            await service.CreateAsync(body);
+            var entity = await service.CreateAsync(body);
 
-            return Ok();
+            return Ok(entity);
         }
 
         [HttpPut("{entityType}")]
-        public async Task<IActionResult> Update(string entityType, [FromBody] object entity)
+        public async Task<IActionResult> Update(string entityType, [FromBody] JsonElement jsonData)
         {
+            var body = JsonConvert.DeserializeObject(jsonData.GetRawText(), EntityType);
+
             dynamic service = getDynamicService();
 
-            await service.UpdateAsync(entity);
-            return Ok();
+            var entity = await service.UpdateAsync(body);
+
+            return Ok(entity);
         }
 
         [HttpDelete("{entityType}/{id}")]
@@ -83,7 +87,7 @@ namespace Midas.Net.Crud
 
         private dynamic getDynamicService()
         {
-            var serviceType = typeof(ICrudService<,>).MakeGenericType(EntityType, typeof(long));
+            var serviceType = typeof(ICrudService<>).MakeGenericType(EntityType);
             var service = (dynamic)_serviceProvider.GetService(serviceType);
             return service;
         }

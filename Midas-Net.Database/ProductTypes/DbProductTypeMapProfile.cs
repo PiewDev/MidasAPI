@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Midas.Net.Database.Sales;
-using Midas.Net.Domain.Products.DTO;
+using Midas.Net.Domain.Products;
 using Midas.Net.Domain.Sales;
 using System;
 using System.Collections.Generic;

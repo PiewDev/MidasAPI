@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using Midas.Net.Domain;
+using Midas.Net.Domain.Crud;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -8,7 +10,7 @@ using System.Reflection;
 
 namespace Midas.Net.Database.Crud
 {
-    public class CrudRepository<TEntity, TId> : IRepository<TEntity, TId>
+    public class CrudRepository<TEntity> : ICrudRepository<TEntity>
     where TEntity : class
     {
         protected readonly CommerceDbContext _dbContext;
@@ -28,13 +30,12 @@ namespace Midas.Net.Database.Crud
             return _mapper.Map<List<TEntity>>(result);
         }
 
-        public async Task<TEntity> GetByIdAsync(TId id)
+        public async Task<TEntity> GetByIdAsync(long id)
         {
-            dynamic result = await findByAsync(id);
+            dynamic result = await FindById(id);
 
             return _mapper.Map<TEntity>(result);
         }
-
         public async Task<TEntity> CreateAsync(TEntity entity)
         {
             var dbEntity = MapToDb(entity);
@@ -45,18 +46,20 @@ namespace Midas.Net.Database.Crud
 
             return _mapper.Map<TEntity>(dbEntity);
         }
-
        
-        public async Task UpdateAsync(TEntity entity)
+        public async Task<TEntity> UpdateAsync(TEntity entity)
         {
             object dbEntity = MapToDb(entity);
             Call("Update", dbEntity);
 
             await _dbContext.SaveChangesAsync();
+
+            return _mapper.Map<TEntity>(dbEntity);
+
         }
-        public async Task DeleteAsync(TId id)
+        public async Task DeleteAsync(long id)
         {
-            var entity = await findByAsync(id);
+            var entity = await FindById(id);
 
             if (entity != null)
             {
@@ -64,12 +67,6 @@ namespace Midas.Net.Database.Crud
                 Call("Update", entity);
                 await _dbContext.SaveChangesAsync();
             }
-        }
-
-        public async Task<List<TEntity>> FindByAsync(Expression<Func<TEntity, bool>> predicate)
-        {
-            var result = await GetFilteredEntitiesAsync(predicate);
-            return _mapper.Map<List<TEntity>>(result);
         }
 
         private object MapToDb(TEntity entity)
@@ -91,27 +88,14 @@ namespace Midas.Net.Database.Crud
             var addMethod = _dbSet.GetType().GetMethod(method);
             return await addMethod.Invoke(_dbSet);
         }
-        public async Task<List<TEntity>> GetFilteredEntitiesAsync(Expression<Func<TEntity, bool>> predicate)
+        async Task<dynamic> FindById(long id)
         {
-            var whereMethod = _dbSet.GetType().GetMethod("Where");
-            var toListAsyncMethod = typeof(EntityFrameworkQueryableExtensions).GetMethod("ToListAsync");
+            var findMethod = _dbSet.GetType().GetMethod("FindAsync", new[] { typeof(object[])});
+            var entity = await findMethod.Invoke(_dbSet, new object[] { new object[] { id } });
 
-            
-            var parameter = Expression.Parameter(typeof(TEntity), "x");
-            var predicateExpression = Expression.Lambda<Func<TEntity, bool>>(predicate, parameter);
+            return entity;
+        }       
 
-            
-            var filteredDbSet = whereMethod.Invoke(_dbSet, new object[] { predicateExpression });
-
-            
-            var resultListTask = (Task)toListAsyncMethod.MakeGenericMethod(typeof(TEntity)).Invoke(null, new object[] { filteredDbSet });
-            await resultListTask;
-
-          
-            var resultList = (IEnumerable<TEntity>)resultListTask.GetType().GetProperty("Result").GetValue(resultListTask);
-
-            return resultList.ToList();
-        }
         dynamic GetDbSetInstance()
         {
            
@@ -125,13 +109,7 @@ namespace Midas.Net.Database.Crud
 
             return dbSet;
         }
-
-        async Task<dynamic> findByAsync(object id)
-        {
-            var findMethod = _dbSet.GetType().GetMethod("FindAsync", BindingFlags.Public | BindingFlags.Instance);
-            var result = await(Task<object>)findMethod.Invoke(_dbSet, new object[] { id });
-            return (TEntity)result;
-        }
     }
+    
 
 }
